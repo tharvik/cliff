@@ -7,6 +7,7 @@ import logging.handlers
 import os
 import sys
 
+from .bash import BashCompletionAction
 from .help import HelpAction, HelpCommand
 from .interactive import InteractiveApp
 
@@ -90,7 +91,7 @@ class App(object):
             '-h', '--help',
             action=HelpAction,
             nargs=0,
-            default=self,  # tricky
+            default=self,  # tricky, need stdout and command_manager
             help="show this help message and exit",
             )
         parser.add_argument(
@@ -98,6 +99,13 @@ class App(object):
             default=False,
             action='store_true',
             help='show tracebacks on errors',
+            )
+        parser.add_argument(
+            '--bash-completion',
+            action=BashCompletionAction,
+            nargs=0,
+            default=self,  # tricky, need stdout and command_manager
+            help='show the bash completion instructions'
             )
         return parser
 
