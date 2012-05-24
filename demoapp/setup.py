@@ -67,6 +67,7 @@ setup(
             'list files = cliffdemo.list:Files',
             'files = cliffdemo.list:Files',
             'file = cliffdemo.show:File',
+            'random = cliffdemo.printrand:Random',
             'show file = cliffdemo.show:File',
             ],
         },

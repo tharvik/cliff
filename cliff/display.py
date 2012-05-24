@@ -70,12 +70,6 @@ class DisplayCommandBase(Command):
         return parser
 
     @abc.abstractmethod
-    def get_data(self, parsed_args):
-        """Return a two-part tuple with a tuple of column names
-        and a tuple of values.
-        """
-
-    @abc.abstractmethod
     def run(self, parsed_args):
         column_names, data = self.get_data(parsed_args)
         formatter = self.formatters[parsed_args.formatter]
