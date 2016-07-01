@@ -6,6 +6,7 @@ import locale
 import logging
 import logging.handlers
 import os
+import six
 import sys
 
 from cliff import argparse
@@ -330,7 +331,11 @@ class App(object):
             return 2
         cmd_factory, cmd_name, sub_argv = subcommand
         kwargs = {}
-        if 'cmd_name' in inspect.getargspec(cmd_factory.__init__).args:
+        if six.PY2:
+            argspec = inspect.getargspec
+        else:
+            argspec = inspect.getfullargspec
+        if 'cmd_name' in argspec(cmd_factory.__init__).args:
             kwargs['cmd_name'] = cmd_name
         cmd = cmd_factory(self, self.options, **kwargs)
         err = None
